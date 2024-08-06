@@ -31,5 +31,3 @@ def inverter_matriz(A):
             A[i][j] = A[i][j]/a
             inversa[i][j] = inversa[i][j]/a
     return inversa
-
-print(inverter_matriz(np.array([[2, 1], [1, 2]])))
