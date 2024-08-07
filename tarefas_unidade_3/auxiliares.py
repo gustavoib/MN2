@@ -6,28 +6,23 @@ def normaliza(v):
     v_normalizado = v/math.sqrt(np.dot(v_transposto, v))
     return v_normalizado
 
-def criar_identidade(n):
-    identidade = np.zeros((n, n))
-    for i in range(n):
-        identidade[i][i] = 1
-    return identidade
-    
-def inverter_matriz(A):
+def calculaLU(A):
     n = len(A)
-    inversa = [[0 for i in range(n)] for j in range(n)]
-    
-    inversa = criar_identidade(n)
-    
+    L = np.zeros((n, n))
+    U = np.zeros((n, n))
     for i in range(n):
-        for j in range(n):
-            if i != j:
-                ratio = A[j][i]/A[i][i]
-                for k in range(n):
-                    A[j][k] = A[j][k] - ratio * A[i][k]
-                    inversa[j][k] = inversa[j][k] - ratio * inversa[i][k]
-    for i in range(n):
-        a = A[i][i]
-        for j in range(n):
-            A[i][j] = A[i][j]/a
-            inversa[i][j] = inversa[i][j]/a
-    return inversa
+        for j in range(i, n):
+            soma = 0
+            for k in range(i):
+                soma += L[i][k]*U[k][j]
+            U[i][j] = A[i][j] - soma
+        for j in range(i, n):
+            if i == j:
+                L[i][i] = 1
+            else:
+                soma = 0
+                for k in range(i):
+                    soma += L[j][k]*U[k][i]
+                L[j][i] = (A[j][i] - soma)/U[i][i]
+    return L, U
+    
