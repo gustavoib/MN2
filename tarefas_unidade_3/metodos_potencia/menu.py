@@ -21,7 +21,7 @@ opcao = menu()
 while opcao != 0:
     if opcao == 1:
         lambda1, x1 = potencia_regular(A, v0, epsilon)
-        print("MÉTODO DA POTÊNCIA REGULAR")
+        print("MÉTODO DA POTÊNCIA REGULAR\n")
         print("Autovalor: ", lambda1)
         print("Autovetor: ", x1)
         print("\n")
@@ -34,12 +34,11 @@ while opcao != 0:
     elif opcao == 3:
         mu = 1
         lambdai, xi = potencia_com_deslocamento(A, v0, epsilon, mu)
-        print("MÉTODO DA POTÊNCIA COM DESLOCAMENTO")
+        print("MÉTODO DA POTÊNCIA COM DESLOCAMENTO\n")
         print("Autovalor: ", lambdai)
         print("Autovetor: ", xi)
         print("\n")
     else:
         print("Opção inválida")
     
-    opcao = menu()
     
