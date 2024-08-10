@@ -8,8 +8,6 @@ def normaliza(v):
     v_normalizado = v/math.sqrt(np.dot(v_transposto, v))
     return v_normalizado
 
-print(normaliza(v))
-
 def calculaLU(A):
     n = len(A)
     L = np.zeros((n, n))
