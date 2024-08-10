@@ -1,5 +1,5 @@
 import numpy as np
-from potencia_inversa_alg1 import potencia_inversa1
+from potencia_inversa import potencia_inversa1
 
 def potencia_com_deslocamento(A, v0, epsilon, mu):
     #step 1
