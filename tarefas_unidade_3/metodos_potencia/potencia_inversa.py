@@ -45,24 +45,3 @@ def potencia_inversa2(A, v0, epsilon):
 
     #step 5
     return lambda_n, x_n
-
-#matrizes A1 e A2 e A3 e vetores de chute correspondentes para a tarefa 12
-A1 = np.array([
-    [5, 2, 1], 
-    [2, 3, 1],
-    [1, 1, 2]
-])
-
-A2 = np.array([
-    [-14, 1, -2], 
-    [1, -1, 1], 
-    [-2, 1, -11]
-])
-
-A3 = np.array([
-    [40, 8, 4, 2, 1],
-    [8, 30, 12, 6, 2],
-    [4, 12, 20, 1, 2],
-    [2, 6, 1, 25, 4],
-    [1, 2, 2, 4, 5]
-])
