@@ -1,8 +1,6 @@
 import math
 import numpy as np
 
-v = np.array([2.82288, 1.82288, 1])
-
 def normaliza(v):
     v_transposto = np.transpose(v)
     v_normalizado = v/math.sqrt(np.dot(v_transposto, v))

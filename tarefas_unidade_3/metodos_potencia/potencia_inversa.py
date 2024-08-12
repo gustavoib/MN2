@@ -66,12 +66,3 @@ A3 = np.array([
     [2, 6, 1, 25, 4],
     [1, 2, 2, 4, 5]
 ])
-
-# usado para ambas as matrizes A1 e A2
-v0 = np.array([1, 1, 1])
-# usado para a matriz A3
-v1 = np.array([1, 1, 1, 1, 1])
-
-resultado = potencia_inversa2(A3, v1, 0.0001)
-
-print(f"Autovalor dominante: {resultado[0]}\nAutovetor associado: {resultado[1]}")

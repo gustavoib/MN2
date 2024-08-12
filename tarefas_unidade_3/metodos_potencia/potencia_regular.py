@@ -36,11 +36,3 @@ A2 = np.array([
     [2, 6, 1, 25, 4],
     [1, 2, 2, 4, 5]
 ])
-
-# usada para a matriz A1
-v0 = np.array([1, 1, 1])
-# usada para a matriz A2
-v1 = np.array([1, 1, 1, 1, 1])     
-
-resultado = potencia_regular(A2, v1, 0.0001) 
-print(f"Autovalor dominante: {resultado[0]}\nAutovetor associado: {resultado[1]}")
