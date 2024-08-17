@@ -10,7 +10,6 @@ import numpy as np
 
 def runge_kutta_3_ordem(t0, v0, y0, k, m, g, delta):
     s0 = np.array([v0, y0])
-    i = 1
     altura_max = y0
     tempo_max = t0
     v_final = 0
@@ -30,8 +29,7 @@ def runge_kutta_3_ordem(t0, v0, y0, k, m, g, delta):
         s1 = s0 + delta*((1/6)*ed1 + (4/6)*ed2 + (1/6)*ed3) 
         
         # atualizacao dos estados
-        t0 = t0 + delta
-        i += 1
+        t0 += delta
         v_final = v0
         v0 = s1[0]
         y0 = s1[1]
@@ -53,10 +51,8 @@ y0 = 200
 k = 0.25
 m = 2
 g = 10
-i = 1
 
 deltas = [0.1, 0.01, 0.001, 0.0001]
 
 for delta in deltas:
     runge_kutta_3_ordem(t0, v0, y0, k, m, g, delta)
-    i += 1
