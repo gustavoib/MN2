@@ -12,4 +12,11 @@
 1. método da potência regular
 2. método da poência inversa (algoritmo 1)
 3. método da poência com deslocamento
+4. Householder
+5. Jacobi
+6. QR
+
+## unidade 4
+1. Runge-Kutta
+2. Preditor-Corretor
     
