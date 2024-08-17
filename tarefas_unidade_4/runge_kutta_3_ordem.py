@@ -23,9 +23,9 @@ def runge_kutta_3_ordem(t0, v0, y0, k, m, g, delta):
         y1 = y0 + delta*v0
         
         # atualizacao melhorada dos estados
-        ed1 = np.array([-g-(k/m)*v0, v0])
-        ed2 = np.array([-g-(k/m)*v_meio, v_meio])
-        ed3 = np.array([-g-(k/m)*v1, v1])
+        ed1 = np.array([-g - (k/m)*v0, v0])
+        ed2 = np.array([-g - (k/m)*v_meio, v_meio])
+        ed3 = np.array([-g - (k/m)*v1, v1])
         
         s1 = s0 + delta*((1/6)*ed1 + (4/6)*ed2 + (1/6)*ed3) 
         
@@ -44,7 +44,7 @@ def runge_kutta_3_ordem(t0, v0, y0, k, m, g, delta):
     print(f"delta = {delta}")
     print(f"Altura máxima: {altura_max}")
     print(f"Tempo para atingir a altura máxima: {tempo_max}")
-    print(f"Tempo total de queda: {t0-delta}")
+    print(f"Tempo total de queda: {t0 - delta}")
     print(f"Velocidade final: {abs(v_final)}\n")
     
 t0 = 0
