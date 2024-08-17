@@ -44,8 +44,8 @@ v1 = np.array([1, 1, 1, 1, 1])
 
 def menu():
     # escolher entre as tareras 11 e 12
-    tarefa = int(input("Escolha a tarefa (11 ou 12): "))
-    if tarefa == 11:
+    tarefa = int(input("Escolha a tarefa (10 ou 11): "))
+    if tarefa == 10:
         # escolha entre as matrizes A1 e A2
         matriz = int(input(f"A1:\n{A1_t11}\nA2:\n{A2_t11}\nEscolha a matriz que deseja testar (1 - A1 ou 2 - A2): "))
         
@@ -58,7 +58,7 @@ def menu():
         else:
             print("Matriz inválida")
         
-    elif tarefa == 12:
+    elif tarefa == 11:
         # escolha entre o metodo da potencia inversa e o metodo da potencia com deslocamento
         metodo = int(input("Escolha o método (1 - potência inversa ou 2 - potência com deslocamento): "))
         
