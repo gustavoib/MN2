@@ -77,12 +77,14 @@ def integra(qtd_pontos, pesos_w, raizes_s, epson, a, b):
     return interacoes, resultado
 
 erro = 10**(-6)
+a = 0 
+b = 1
 
 print("====== GAUSS LEGENDRE 2 PONTOS ======")
-print(f"{gauss_Legendre_2_pontos(0, 1, erro)}\n")
+print(f"{gauss_Legendre_2_pontos(a, b, erro)}\n")
 
 print("====== GAUSS LEGENDRE 3 PONTOS ======")
-print(f"{gauss_Legendre_3_pontos(0, 1, erro)}\n")
+print(f"{gauss_Legendre_3_pontos(a, b, erro)}\n")
 
 print("====== GAUSS LEGENDRE 4 PONTOS ======")
-print(f"{gauss_Legendre_4_pontos(0, 1, erro)}\n")
+print(f"{gauss_Legendre_4_pontos(a, b, erro)}\n")
