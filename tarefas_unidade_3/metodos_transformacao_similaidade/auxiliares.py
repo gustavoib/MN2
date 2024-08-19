@@ -41,3 +41,4 @@ def solverLU(L, U, b):
             soma += U[i][j]*x[j]
         x[i] = (y[i] - soma)/U[i][i]
     return x
+    

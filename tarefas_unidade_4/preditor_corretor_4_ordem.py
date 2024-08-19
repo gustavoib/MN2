@@ -8,6 +8,39 @@ import numpy as np
 # g: gravidade
 # delta: passo  
 
+def runge_kutta_4_ordem(t0, v0, y0, k, m, g, delta):
+    v_velho = v0
+    y_velho = y0
+    
+    # vetor para armazenar os estados (o método é de passo multiplo)
+    s = np.array([v_velho, y_velho])
+    
+    while y_velho > 0:
+        f1 = np.array([-g - (k/m)*v_velho, v_velho])
+        v2 = v_velho + (delta/2) * f1[0]
+        f2 = np.array([-g - (k/m)*v2, v2])
+        v3 = v_velho + (delta/2 * f2[0])
+        f3 = np.array([-g - (k/m)*v3, v3])
+        v4 = v_velho + (delta * f3[0])
+        f4 = np.array([-g - (k/m)*v4, v4])
+        
+        v_novo = v_velho + (delta/6.0)*(f1[0] + 2*f2[0] + 2*f3[0] + f4[0])
+        y_novo = y_velho + (delta/6.0)*(f1[1] + 2*f2[1] + 2*f3[1] + f4[1])
+        
+        temp = s
+        temp = np.append(temp, v_novo)
+        temp = np.append(temp, y_novo)
+        
+        s = temp
+        v_velho = v_novo
+        y_velho = y_novo
+        
+    print(f"delta = {delta}")
+    print(f"Altura máxima: {max(s[1::2])}")
+    print(f"Tempo para atingir a altura máxima: {s[1::2].argmax() * delta}")
+    print(f"Tempo total de queda: {len(s[1::2]) * delta}")
+    print(f"Velocidade final: {abs(s[-2])}\n")
+
 def preditor_corretor_4_ordem(t0, v0, y0, k, m, g, delta):
     v_velho = v0
     y_velho = y0

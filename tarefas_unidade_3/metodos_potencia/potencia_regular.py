@@ -20,4 +20,4 @@ def potencia_regular(A, v0, epsilon):
         
         #step9 - verificar convergência de lambda_novo
         if abs((lambda_novo - lambda_velho)/lambda_novo) <= epsilon:
-            return lambda_novo, vk_velho_normalizado
+            return lambda_novo, vk_velho_normalizado        
