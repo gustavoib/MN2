@@ -17,21 +17,21 @@ def controle(f, a, b, epson, tipo):
         for i in range(N):
             Xi = a + i*delta
             Xf = Xi + delta
-            if(tipo=="F1"):
+            if(tipo=='F1'):
                 integral += regra_trapezio_fechada(f, Xi, Xf)
-            elif(tipo=="F2"):
+            elif(tipo=='F2'):
                 integral += regra_simpson_1_3_fechada(f, Xi, Xf)
-            elif(tipo=="F3"):
+            elif(tipo=='F3'):
                 integral += regra_simpson_3_8_fechada(f, Xi, Xf)
-            elif(tipo=="F4"):
+            elif(tipo=='F4'):
                 integral += regra_quadratura_fechada(f, Xi, Xf)
-            elif(tipo=="A1"):
+            elif(tipo=='A1'):
                 integral += regra_trapezio_aberta(f, Xi, Xf)
-            elif(tipo=="A2"):
+            elif(tipo=='A2'):
                 integral += regra_simpson_1_3_aberta(f, Xi, Xf)
-            elif(tipo=="A3"):
+            elif(tipo=='A3'):
                 integral += regra_simpson_3_8_aberta(f, Xi, Xf)
-            elif(tipo=="A4"):
+            elif(tipo=='A4'):
                 integral += regra_quadratura_aberta(f, Xi, Xf)
         
         N = N*2
@@ -108,13 +108,13 @@ b = 1
 epson = 10**(-6)
 
 print("============== FILOSÓFIA FECHADA ================")
-print(f"REGRA DO TRAPÉZIO:\n{controle(funcao, a, b, epson, "F1")}\n")
-print(f"REGRA DE SIMPSON 1/3:\n{controle(funcao, a, b, epson, "F2")}\n")
-print(f"REGRA DE SIMPSON 3/8:\n{controle(funcao, a, b, epson, "F3")}\n")
-print(f"REGRA DA QUADRATURA:\n{controle(funcao, a, b, epson, "F4")}\n")
+print(f"REGRA DO TRAPÉZIO:\n{controle(funcao, a, b, epson, 'F1')}\n")
+print(f"REGRA DE SIMPSON 1/3:\n{controle(funcao, a, b, epson, 'F2')}\n")
+print(f"REGRA DE SIMPSON 3/8:\n{controle(funcao, a, b, epson, 'F3')}\n")
+print(f"REGRA DA QUADRATURA:\n{controle(funcao, a, b, epson, 'F4')}\n")
 
 print("\n============= FILOSÓFIA ABERTA ================")
-print(f"REGRA DO TRAPÉZIO:\n{controle(funcao, a, b, epson, "A1")}\n")
-print(f"REGRA DE SIMPSON 1/3:\n{controle(funcao, a, b, epson, "A2")}\n")
-print(f"REGRA DE SIMPSON 3/8:\n{controle(funcao, a, b, epson, "A3")}\n")
-print(f"REGRA DA QUADRATURA:\n{controle(funcao, a, b, epson, "A4")}\n")
+print(f"REGRA DO TRAPÉZIO:\n{controle(funcao, a, b, epson, 'A1')}\n")
+print(f"REGRA DE SIMPSON 1/3:\n{controle(funcao, a, b, epson, 'A2')}\n")
+print(f"REGRA DE SIMPSON 3/8:\n{controle(funcao, a, b, epson, 'A3')}\n")
+print(f"REGRA DA QUADRATURA:\n{controle(funcao, a, b, epson, 'A4')}\n")
