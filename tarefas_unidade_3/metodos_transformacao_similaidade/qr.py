@@ -7,12 +7,20 @@ def metodoQR(A, epsilon):
     val = 100
     P = np.identity(n)
     A_velha = A.copy()
+    passo = 1
     while(val > epsilon):
         Q, R = decomposicao_QR(A_velha)
+
+        print(f"Matriz Q{passo}:")
+        print(Q)
+        print(f"Matriz R{passo}:")
+        print(R)
+
         A_nova = np.dot(R, Q)
         A_velha = A_nova
         P = np.dot(P, Q)
         val = somaDosQuadradosDosTermosAbaixoDaDiagonal(A_nova)
+        passo += 1
     return P, A_nova
 
 
@@ -49,13 +57,16 @@ def matrizJacobi_R_velha(R, i, j, n):
 
     return J_ij
 
-if __name__ == "__main__":
-    A = np.array([[40, 8,  4,  2,  1],
-                  [8,  30, 12, 6,  2],
-                  [4,  12, 20, 1,  2],
-                  [2,  6,  1,  25, 4],
-                  [1,  2,  2,  4,  5]], dtype=float)
-    epsilon = 10e-6
+def main():
+    A = np.array([[40, 8, 4, 2, 1], 
+                  [8, 30, 12, 6, 2], 
+                  [4, 12, 20, 1, 2], 
+                  [2, 6, 1, 25, 4], 
+                  [1, 2, 2, 4, 5]])
+    epsilon = 10**-6
     P, A_final = metodoQR(A, epsilon)
     print(A_final)
     print(P)
+
+if __name__ == "__main__":
+    main()

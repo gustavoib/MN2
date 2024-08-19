@@ -6,11 +6,17 @@ def jacobi(A, erro=10**-6):
     val = 100
     P = np.identity(n)
     A_velha = A.copy()
+    passo = 1
     while val > erro:
         A_nova, J = varreduraDeJacobi(A_velha, n)
+
+        print(f"Matriz da varredura {passo}:")
+        print(A_nova)
+
         A_velha = A_nova
         P = P.dot(J)
         val = somaDosQuadradosDosTermosAbaixoDaDiagonal(A_velha)
+        passo += 1
     for i in range(n):
         lambdas[i] = A_nova[i][i]
     return P, lambdas
@@ -51,12 +57,18 @@ def matrizJacobi(A, i, j, n):
 
     return J_ij
 
-if __name__ == "__main__":
+def main():
     A = np.array([[40, 8,  4,  2,  1],
                   [8,  30, 12, 6,  2],
                   [4,  12, 20, 1,  2],
                   [2,  6,  1,  25, 4],
                   [1,  2,  2,  4,  5]], dtype=float)
     P, lambdas = jacobi(A)
+
+    print("Matriz P:")
     print(P)
+    print("Autovalores:")
     print(lambdas)
+
+if __name__ == "__main__":
+    main()

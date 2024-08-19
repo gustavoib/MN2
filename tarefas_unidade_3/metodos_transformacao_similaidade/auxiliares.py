@@ -42,3 +42,7 @@ def solverLU(L, U, b):
         x[i] = (y[i] - soma)/U[i][i]
     return x
     
+v = np.array([8.96738, 7.44911, 4.4302, 2.91429, 1])
+
+v_normalizado = normaliza(v)
+print(v_normalizado)
