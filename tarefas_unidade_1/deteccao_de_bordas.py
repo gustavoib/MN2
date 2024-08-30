@@ -1,13 +1,4 @@
-# 1) Suavize a imagem, aplicando um filtro Gaussiano
-# 2) Na imagem do passo 1, aplique o filtro convolucional de Gradiente 
-# 2.1) um filtro de Sobel para a derivada na direção x, gerando uma imagem/matriz, A, com os valores da derivada em cada pixel/elemento da matriz;
-# 2.2) um filtro de Sobel para a derivada na direção y, gerando uma imagens/matriz, B, com os valores da derivada em cada pixel/elemento da matriz;
-# 2.3) em cada uma das matrizes, A e B, eleve ao quadrado os valores dos elementos;
-# 2.4) some as duas matrizes A e B modificadas no passo 2.3 e tire a raiz quadrada  de cada elemento dessa matriz, C
-# 3) Escolha um valor (float)  para threshold e 
-# 4) gere uma matriz Final, D, com 
-# >>>>> pixel 0 caso o pixel correspondente da matriz C seja menor do que o threshold
-# >>>>> pixel 1. caso o pixel correspondente da matriz C seja maior do que o threshold.
+# Detecção de bordas em imagens
 
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -15,15 +6,28 @@ import numpy as np
 from scipy.signal import convolve2d
 import math
 
-def show_image(pixel_matrix, edges):
-    plt.subplot(1, 2, 1)
+def show_image(pixel_matrix, pixel_matrix_suavizado, edges1, edges2):
+
+    # Definindo o tamanho da janela
+    plt.figure(figsize=(8, 6))
+
+    plt.subplot(2, 2, 1)
     plt.imshow(pixel_matrix, cmap='gray')
     plt.title('Imagem original')
 
-    plt.subplot(1, 2, 2)
-    plt.imshow(edges, cmap='gray')
-    plt.title('Imagem com bordas detectadas')
+    plt.subplot(2, 2, 2)
+    plt.imshow(pixel_matrix_suavizado, cmap='gray')
+    plt.title('Imagem suavizada')
 
+    plt.subplot(2, 2, 3)
+    plt.imshow(edges1, cmap='gray')
+    plt.title('Bordas detectadas - Filtro Gradiente')
+
+    plt.subplot(2, 2, 4)
+    plt.imshow(edges2, cmap='gray')
+    plt.title('Bordas detectadas - Filtro Laplaciano')
+
+    plt.tight_layout()
     plt.show()
 
 def filtro_gaussiano(matriz, sigma=1):
@@ -115,24 +119,24 @@ def algoritmo_1(pixel_matrix):
     imagem_suavizada = filtro_gaussiano(pixel_matrix, sigma=1)
 
     # 2) Na imagem do passo 1, aplique o filtro convolucional de Gradiente
-    edges = filtro_gradiente(imagem_suavizada)
+    D = filtro_gradiente(imagem_suavizada)
     # 3) Escolha um valor (float)  para threshold e 
-    threshold = 70
+    threshold = 50.0
     # 4) gere uma matriz Final, D, com 
     # >>>>> pixel 0 caso o pixel correspondente da matriz C seja menor do que o threshold
     # >>>>> pixel 1. caso o pixel correspondente da matriz C seja maior do que o threshold.
-    for i in range(edges.shape[0]):
-        for j in range(edges.shape[1]):
-            if edges[i, j] > threshold:
-                edges[i, j] = 1
+    for i in range(D.shape[0]):
+        for j in range(D.shape[1]):
+            if D[i, j] > threshold:
+                D[i, j] = 1
             else:
-                edges[i, j] = 0
+                D[i, j] = 0
 
-    return edges
+    return D, imagem_suavizada
 
 def algoritmo_2(pixel_matrix, tolerance=0.0001):
     # 1) Suavize a imagem, aplicando um filtro Gaussiano
-    imagem_suavizada = filtro_gaussiano(pixel_matrix, sigma=3)
+    imagem_suavizada = filtro_gaussiano(pixel_matrix, sigma=5)
     # 2) Na imagem do passo 1, aplique o filtro convolucional de Laplace, gerando uma imagem/matriz A
     A = filtro_laplaciano(imagem_suavizada)
     # 3) Por simplicidade, gere uma imagem/matriz, B, percorrendo a imagem A e escrevendo em B
@@ -149,21 +153,10 @@ def algoritmo_2(pixel_matrix, tolerance=0.0001):
 
 
 def main():
-    image_path = "derivada\imagem.jpg"
+    image_path = "tarefas_unidade_1/imagem.jpg"
     pixel_matrix = image_to_pixel_matrix(image_path)
-
-    while(True):
-        print("Qual algoritmo deseja executar? ( 1 ou 2 ) ou 's' para sair: ")
-        algoritmo = input()
-        if algoritmo == '1':
-            edges = algoritmo_1(pixel_matrix)
-            show_image(pixel_matrix, edges)
-        elif algoritmo == '2':
-            edges = algoritmo_2(pixel_matrix)
-            show_image(pixel_matrix, edges)
-        elif algoritmo == 's':
-            break
-        else:
-            print("Digite uma opção válida\n")
+    edges1, imagem_suavizada = algoritmo_1(pixel_matrix)
+    edges2 = algoritmo_2(pixel_matrix)
+    show_image(pixel_matrix, imagem_suavizada, edges1, edges2)
 
 main()

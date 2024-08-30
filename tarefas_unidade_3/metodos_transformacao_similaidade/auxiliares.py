@@ -43,6 +43,3 @@ def solverLU(L, U, b):
     return x
     
 v = np.array([8.96738, 7.44911, 4.4302, 2.91429, 1])
-
-v_normalizado = normaliza(v)
-print(v_normalizado)

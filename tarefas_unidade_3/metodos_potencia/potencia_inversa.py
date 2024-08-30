@@ -33,7 +33,7 @@ def potencia_inversa2(A, v0, epsilon):
         #step 8
         vk_novo = solverLU(L, U, vk_velho_normalizado)
         #step 9
-        lambda_1_novo = np.transpose(vk_velho_normalizado).dot(vk_novo)
+        lambda_1_novo = vk_velho_normalizado.dot(vk_novo)
         #step 10
         if abs((lambda_1_novo - lambda_1_velho)/lambda_1_novo) <= epsilon:
             break
