@@ -8,11 +8,11 @@ import numpy as np
 # g: gravidade
 # delta: passo  
 
-def runge_kutta_4_ordem(t0, v0, y0, k, m, g, delta):
+# runge-kutta de 4ª ordem para uso em tarefas
+def runge_kutta_4_ordem_para_tarefa(t0, v0, y0, k, m, g, delta):
     v_velho = v0
     y_velho = y0
     
-    # vetor para armazenar os estados (o método é de passo multiplo)
     s = np.array([v_velho, y_velho])
     
     while y_velho > 0:
@@ -35,12 +35,47 @@ def runge_kutta_4_ordem(t0, v0, y0, k, m, g, delta):
         v_velho = v_novo
         y_velho = y_novo
         
+    # Variáveis para os resultados
+    alturas = s[1::2]
+    velocidades = s[::2]
+    altura_maxima = max(alturas)
+    tempo_altura_maxima = alturas.argmax() * delta
+    tempo_total_queda = len(alturas) * delta
+    velocidade_final = abs(velocidades[-1])
+    
+    # Impressão dos resultados
     print(f"delta = {delta}")
-    print(f"Altura máxima: {max(s[1::2])}")
-    print(f"Tempo para atingir a altura máxima: {s[1::2].argmax() * delta}")
-    print(f"Tempo total de queda: {len(s[1::2]) * delta}")
-    print(f"Velocidade final: {abs(s[-2])}\n")
+    print(f"Altura máxima: {altura_maxima}")
+    print(f"Tempo para atingir a altura máxima: {tempo_altura_maxima}")
+    print(f"Tempo total de queda: {tempo_total_queda}")
+    print(f"Velocidade final: {velocidade_final}\n")
+    
+# runge kutta de 4ª ordem para inicialização no preditor-corretor de 4ª ordem
+def runge_kutta_4_ordem(t0, v0, y0, k, m, g, delta):
+    v_velho = v0
+    y_velho = y0
+    i = 0
+    
+    s = np.array([v_velho, y_velho])
+    
+    for i in range(1, 4):
+        f1 = np.array([-g - (k/m)*v_velho, v_velho])
+        v2 = v_velho + (delta/2) * f1[0]
+        f2 = np.array([-g - (k/m)*v2, v2])
+        v3 = v_velho + (delta/2 * f2[0])
+        f3 = np.array([-g - (k/m)*v3, v3])
+        v4 = v_velho + (delta * f3[0])
+        f4 = np.array([-g - (k/m)*v4, v4])
+        
+        s = np.append(s, v_velho + (delta/6.0)*(f1[0] + 2*f2[0] + 2*f3[0] + f4[0]))
+        s = np.append(s, y_velho + (delta/6.0)*(f1[1] + 2*f2[1] + 2*f3[1] + f4[1]))
+        
+        v_velho = s[i*2]
+        y_velho = s[i*2 + 1]
+    
+    return s
 
+# método preditor-corretor de 4ª ordem
 def preditor_corretor_4_ordem(t0, v0, y0, k, m, g, delta):
     v_velho = v0
     y_velho = y0
@@ -48,24 +83,8 @@ def preditor_corretor_4_ordem(t0, v0, y0, k, m, g, delta):
     # vetor para armazenar os estados (o método é de passo multiplo)
     s = np.array([v_velho, y_velho, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
     
-    # inicialização por meio do método de Runge-Kutta de quarta ordem
-    for i in range(1, 4):
-        f1 = np.array(((-g - (k/m)*v_velho), v_velho))
-        v2 = v_velho + (delta/2) * f1[0]
-        f2 = np.array(((-g - (k/m)*v2), v2))
-        v3 = v_velho + (delta/2 * f2[0])
-        f3 = np.array(((-g - (k/m)*v3), v3))
-        v4 = v_velho + (delta * f3[0])
-        f4 = np.array(((-g - (k/m)*v4), v4))
-
-        # preenche o vetor de estados, o índice pode parecer "estranho" pois
-        # os dois primeiros estado já existem (0 e 1), então precisamos atualizados
-        # a partir do índice 2.
-        s[i*2] = v_velho + (delta/6.0)*(f1[0] + 2*f2[0] + 2*f3[0] + f4[0])
-        s[i*2 + 1] = y_velho + (delta/6.0)*(f1[1] + 2*f2[1] + 2*f3[1] + f4[1])
-
-        v_velho = s[i*2]
-        y_velho = s[i*2 + 1]
+    # runge-kutta de 4ª ordem para inicialização
+    s = runge_kutta_4_ordem(t0, v0, y0, k, m, g, delta)
 
     v_velho = v0
     v_novo = y_velho
@@ -128,3 +147,5 @@ deltas = [0.1, 0.01, 0.001, 0.0001]
 
 for delta in deltas:
     preditor_corretor_4_ordem(t0, v0, y0, k, m, g, delta)
+
+
