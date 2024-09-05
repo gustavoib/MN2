@@ -20,12 +20,12 @@ def pvc(n):
     i = 0
     for r_i in pontos:
         if i > 0:
-            A[i, i-1] = esquerdo(delta, r)
+            A[i, i-1] = esquerdo(delta, r_i)
 
-        A[i, i] = centro(delta,r)
+        A[i, i] = centro(delta,r_i)
 
         if i < n-1:
-            A[i, i+1] = direito(delta,r)
+            A[i, i+1] = direito(delta,r_i)
         i += 1
 
     print(A)
