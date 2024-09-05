@@ -1,5 +1,9 @@
 import numpy as np
 from jacobi import somaDosQuadradosDosTermosAbaixoDaDiagonal
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import tabelas as tb
 np.set_printoptions(precision=4, suppress=True)
 
 def metodoQR(A, epsilon):
@@ -11,10 +15,8 @@ def metodoQR(A, epsilon):
     while(val > epsilon):
         Q, R = decomposicao_QR(A_velha)
 
-        print(f"Matriz Q{passo}:")
-        print(Q)
-        print(f"Matriz R{passo}:")
-        print(R)
+        tb.print_matrix(Q, f"Matriz Q{passo}:", 3)
+        tb.print_matrix(R, f"Matriz R{passo}:", 3)
 
         A_nova = np.dot(R, Q)
         A_velha = A_nova
@@ -63,10 +65,12 @@ def main():
                   [4, 12, 20, 1, 2], 
                   [2, 6, 1, 25, 4], 
                   [1, 2, 2, 4, 5]])
+    
     epsilon = 10**-6
     P, A_final = metodoQR(A, epsilon)
-    print(A_final)
-    print(P)
+
+    tb.print_matrix(A_final, "Matriz de Autovalores", 3)
+    tb.print_matrix(P, "Matriz de Autovetores", 3)
 
 if __name__ == "__main__":
     main()

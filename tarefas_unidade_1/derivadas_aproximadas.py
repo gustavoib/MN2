@@ -1,6 +1,7 @@
 # Dada uma função, um ponto, uma filosofia, 
 # a ordem da derivada de 1 a 4 e um delta, 
 # calcular a derivada da função.
+import numpy as np
 
 def derivada(funcao, ponto, filosofia, ordem, delta):
     if ordem < 1 or ordem > 4:
@@ -37,28 +38,19 @@ def derivada(funcao, ponto, filosofia, ordem, delta):
             return (funcao(ponto + 2 * delta) - 4 * funcao(ponto + delta) + 6 * funcao(ponto) - 4 * funcao(ponto - delta) + funcao(ponto - 2 * delta)) / delta**4
     
     else:
-        raise ValueError("Filosofia inválida. Escolha entre 'progressiva', 'regressiva' ou 'central'.")
+        raise ValueError("Filosofia inválida. Escolha entre '1 - Forward', '2 - Backward' ou '3 - Central'.")
 
 
 if __name__ == "__main__":
     # Função para derivar:
     def f(x):
-        return x**3 + 2*x**2 - 3*x + 1
+        return np.sin(x)
 
-    while(True):
-        print("Digite o ponto onde deseja derivar a função: ")
-        ponto = float(input())
-        print("Digite a ordem da derivada: ")
-        ordem = int(input())
-        print("Digite a filosofia da derivada (1 - frontword, 2 - backword, 3 - central): ")
-        filosofia = int(input())
-        print("Digite o delta para o cálculo da derivada: ")
-        delta = float(input())
-        
-        derivada_seno = derivada(f, ponto, filosofia, ordem, delta)
-        print(f"A {ordem}ª derivada da função no ponto {ponto} é aproximadamente {derivada_seno}")
-        
-        print("Deseja calcular outra derivada? (s/n): ")
-        continuar = input()
-        if continuar == 'n':
-            break
+    ponto = np.pi
+    ordem = 1
+    # 1 - Forward, 2 - Backward , 3 - Central
+    filosofia = 3
+    delta = 0.001
+    
+    derivada = derivada(f, ponto, filosofia, ordem, delta)
+    print(f"\nA {ordem}ª derivada da função no ponto {ponto:.4f} é aproximadamente {derivada:.4f}\n")

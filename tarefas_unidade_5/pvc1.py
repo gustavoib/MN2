@@ -18,8 +18,7 @@ def pvc1(n):
     
     print(A)
 
-    b = np.zeros(n-1)
-    b[n-2] = - borda
+    b = -borda
     
     solucao = np.linalg.solve(A, b)
     return solucao

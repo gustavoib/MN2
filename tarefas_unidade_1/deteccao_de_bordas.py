@@ -6,7 +6,7 @@ import numpy as np
 from scipy.signal import convolve2d
 import math
 
-def show_image(pixel_matrix, pixel_matrix_suavizado, edges1, edges2):
+def show_image(pixel_matrix, pixel_matrix_suavizado, edges1):
 
     # Definindo o tamanho da janela
     plt.figure(figsize=(8, 6))
@@ -19,13 +19,9 @@ def show_image(pixel_matrix, pixel_matrix_suavizado, edges1, edges2):
     plt.imshow(pixel_matrix_suavizado, cmap='gray')
     plt.title('Imagem suavizada')
 
-    plt.subplot(2, 2, 3)
+    plt.subplot(2, 1, 2)
     plt.imshow(edges1, cmap='gray')
     plt.title('Bordas detectadas - Filtro Gradiente')
-
-    plt.subplot(2, 2, 4)
-    plt.imshow(edges2, cmap='gray')
-    plt.title('Bordas detectadas - Filtro Laplaciano')
 
     plt.tight_layout()
     plt.show()
@@ -136,7 +132,7 @@ def algoritmo_1(pixel_matrix):
 
 def algoritmo_2(pixel_matrix, tolerance=0.0001):
     # 1) Suavize a imagem, aplicando um filtro Gaussiano
-    imagem_suavizada = filtro_gaussiano(pixel_matrix, sigma=5)
+    imagem_suavizada = filtro_gaussiano(pixel_matrix, sigma=1)
     # 2) Na imagem do passo 1, aplique o filtro convolucional de Laplace, gerando uma imagem/matriz A
     A = filtro_laplaciano(imagem_suavizada)
     # 3) Por simplicidade, gere uma imagem/matriz, B, percorrendo a imagem A e escrevendo em B
@@ -156,7 +152,7 @@ def main():
     image_path = "tarefas_unidade_1/imagem.jpg"
     pixel_matrix = image_to_pixel_matrix(image_path)
     edges1, imagem_suavizada = algoritmo_1(pixel_matrix)
-    edges2 = algoritmo_2(pixel_matrix)
-    show_image(pixel_matrix, imagem_suavizada, edges1, edges2)
+    show_image(pixel_matrix, imagem_suavizada, edges1)
 
-main()
+if __name__ == "__main__":
+    main()
