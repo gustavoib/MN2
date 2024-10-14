@@ -46,7 +46,7 @@ def controle(f, a, b, epson, tipo):
     
         
 def funcao(x):
-    return (math.sin(2*x) + 4*x**2 + 3*x)**2
+    return x ** 6 * math.cos(x)
 
 # polinomio de grau 1 - regra do trapézio - fechada
 def regra_trapezio_fechada(f, a, b):
@@ -104,7 +104,7 @@ def regra_quadratura_aberta(f, a, b):
     return delta_quarta * (11*f(a + h) - 14*f(a + 2*h) + 26*f(a + 3*h) - 14*f(a + 4*h) + 11*f(a + 5*h))
 
 a = 0
-b = 1
+b = math.pi / 2
 epson = 10**(-6)
 
 print("============== FILOSÓFIA FECHADA ================")

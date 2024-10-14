@@ -44,13 +44,13 @@ def derivada(funcao, ponto, filosofia, ordem, delta):
 if __name__ == "__main__":
     # Função para derivar:
     def f(x):
-        return np.sin(x)
+        return x ** 5 * np.cos(x)
 
-    ponto = np.pi
-    ordem = 1
+    ponto = np.pi / 2
+    ordem = 3
     # 1 - Forward, 2 - Backward , 3 - Central
     filosofia = 3
-    delta = 0.001
+    delta = 0.0001
     
     derivada = derivada(f, ponto, filosofia, ordem, delta)
     print(f"\nA {ordem}ª derivada da função no ponto {ponto:.4f} é aproximadamente {derivada:.4f}\n")

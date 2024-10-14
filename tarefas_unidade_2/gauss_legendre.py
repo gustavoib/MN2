@@ -1,7 +1,7 @@
 import math
 
 def funcao(x):
-    return (math.sin(2*x) + 4*x**2 + 3*x)**2
+    return x ** 6 * math.cos(x)
 
 # calcula o valor de x(sk)
 def x(sk, xi, xf):
@@ -78,7 +78,7 @@ def integra(qtd_pontos, pesos_w, raizes_s, epson, a, b):
 
 erro = 10**(-6)
 a = 0 
-b = 1
+b = math.pi / 2
 
 print("====== GAUSS LEGENDRE 2 PONTOS ======")
 print(f"{gauss_Legendre_2_pontos(a, b, erro)}\n")

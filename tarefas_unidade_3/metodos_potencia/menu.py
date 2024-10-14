@@ -2,6 +2,7 @@ import numpy as np
 from potencia_regular import potencia_regular   
 from potencia_inversa import potencia_inversa2
 from potencia_com_deslocamento import potencia_com_deslocamento
+import tabelas as tb
 
 # tarefa 11 - potência regular
 A1_t11 = np.array([
@@ -19,11 +20,12 @@ A2_t11 = np.array([
 ])
 
 # tarefa 12 - potência inversa e potencia com deslocamento
+
 A1_t12 = np.array([
-    [5, 2, 1], 
-    [2, 3, 1],
-    [1, 1, 2]
-])
+    [9, 3, -4, 11],
+    [3, 33, -8, -4],
+    [-4, -8, 28, 25],
+    [11, -4, 25, 73]])
 
 A2_t12 = np.array([
     [-14, 1, -2], 
@@ -39,7 +41,7 @@ A3_t12 = np.array([
     [1, 2, 2, 4, 5]
 ])
 
-v0 = np.array([1, 1, 1])
+v0 = np.array([1, 1, 1, 1])
 v1 = np.array([1, 1, 1, 1, 1])
 
 def menu():
@@ -64,7 +66,10 @@ def menu():
         
         if metodo == 1:
             # escolha entre as matrizes A1, A2 e A3
-            matriz = int(input(f"A1:\n{A1_t12}\nA2:\n{A2_t12}\nA3:\n{A3_t12}\nEscolha a matriz que deseja testar (1 - A1, 2 - A2 ou 3 - A3): "))
+            tb.print_matrix(A1_t12, "A1", 7)
+            tb.print_matrix(A2_t12, "A2", 7)
+            tb.print_matrix(A3_t12, "A3", 7)
+            matriz = int(input(f"Escolha a matriz que deseja testar (1 - A1, 2 - A2 ou 3 - A3): "))
             
             if matriz == 1:
                 resultado = potencia_inversa2(A1_t12, v0, 0.0001)
@@ -80,19 +85,23 @@ def menu():
                 
         elif metodo == 2:
             # escolha entre as matrizes A1, A2 e A3
-            matriz = int(input(f"A1:\n{A1_t12}\nA2:\n{A2_t12}\nA3:\n{A3_t12}\nEscolha a matriz que deseja testar (1 - A1, 2 - A2 ou 3 - A3): "))
+            tb.print_matrix(A1_t12, "A1", 7)
+            tb.print_matrix(A2_t12, "A2", 7)
+            tb.print_matrix(A3_t12, "A3", 7)
+            matriz = int(input(f"Escolha a matriz que deseja testar (1 - A1, 2 - A2 ou 3 - A3): "))
             
             mu = float(input("Digite o valor de mu: "))
             
             if matriz == 1:
                 resultado = potencia_com_deslocamento(A1_t12, v0, 0.0001, mu)
-                print(f"Autovalor dominante: {resultado[0]}\nAutovetor associado: {resultado[1]}")
+                tb.print_matrix([resultado[1]], f"Autovalor: {resultado[0]} | Autovetor", 7)
+
             elif matriz == 2:
                 resultado = potencia_com_deslocamento(A2_t12, v0, 0.0001, mu)
-                print(f"Autovalor dominante: {resultado[0]}\nAutovetor associado: {resultado[1]}")
+                tb.print_matrix([resultado[1]], f"Autovalor: {resultado[0]} | Autovetor", 7)
             elif matriz == 3:
                 resultado = potencia_com_deslocamento(A3_t12, v1, 0.0001, mu)
-                print(f"Autovalor dominante: {resultado[0]}\nAutovetor associado: {resultado[1]}")
+                tb.print_matrix([resultado[1]], f"Autovalor: {resultado[0]} | Autovetor", 7)
             else:
                 print("Matriz inválida")
                 

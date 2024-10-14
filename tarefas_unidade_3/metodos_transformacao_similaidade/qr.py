@@ -60,17 +60,17 @@ def matrizJacobi_R_velha(R, i, j, n):
     return J_ij
 
 def main():
-    A = np.array([[40, 8, 4, 2, 1], 
-                  [8, 30, 12, 6, 2], 
-                  [4, 12, 20, 1, 2], 
-                  [2, 6, 1, 25, 4], 
-                  [1, 2, 2, 4, 5]])
+    A = np.array([
+    [9, 3, -4, 11],
+    [3, 33, -8, -4],
+    [-4, -8, 28, 25],
+    [11, -4, 25, 73]])
     
     epsilon = 10**-6
     P, A_final = metodoQR(A, epsilon)
 
     tb.print_matrix(A_final, "Matriz de Autovalores", 3)
-    tb.print_matrix(P, "Matriz de Autovetores", 3)
+    tb.print_matrix(P, "Matriz de Autovetores (Coluna)", 3)
 
 if __name__ == "__main__":
     main()
